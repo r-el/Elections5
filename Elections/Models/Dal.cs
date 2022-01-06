@@ -43,7 +43,17 @@ namespace Elections.Models
                 StamString = "Stam String",
                 StamInt = 0
             };
+            Manager manager = new Manager
+            {
+               FullName = "Ariel Tanami",
+               Mail = "rel@mail.com",
+               Phone = "0587979345",
+               Password = "1234"
+            };
+
             Stam.Add(stam);
+            Managers.Add(manager);
+
             SaveChanges();
         }
         //---------------------------------------- End Data Seeding ------------------------------//
@@ -51,6 +61,7 @@ namespace Elections.Models
 
         //---------------------------------------- Creating Tables -----------------------------//
         public DbSet<Stam> Stam { get; set; }
+        public DbSet<Manager> Managers { get; set; }
         //---------------------------------------- End Creating Tables -------------------------//
     }
 }
