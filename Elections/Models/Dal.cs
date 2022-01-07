@@ -48,7 +48,7 @@ namespace Elections.Models
                FullName = "Ariel Tanami",
                Mail = "rel@mail.com",
                Phone = "0587979345",
-               Password = "1234",
+               Password = "rel12345",
             };
             Elections elections = new Elections
             {
@@ -56,10 +56,18 @@ namespace Elections.Models
                 EndDate = DateTime.Now.AddDays(30),
                 Manager = manager
             };
+            Voter voter = new Voter
+            {
+                PhoneID = "0587979345",
+                FullName = "Ariel Tanami",
+                Mail = "rel@mail.com",
+                Password = "rel12345"
+            };
 
             Stam.Add(stam);
             Managers.Add(manager);
             Elections.Add(elections);
+            Voters.Add(voter);
 
             SaveChanges();
         }
@@ -70,6 +78,7 @@ namespace Elections.Models
         public DbSet<Stam> Stam { get; set; }
         public DbSet<Elections> Elections { get; set; }
         public DbSet<Manager> Managers { get; set; }
+        public DbSet<Voter> Voters { get; set; }
         //---------------------------------------- End Creating Tables -------------------------//
     }
 }
