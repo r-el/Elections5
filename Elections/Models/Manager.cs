@@ -28,5 +28,7 @@ namespace Elections.Models
         [Required(ErrorMessage = "הזן סיסמא")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
+
+        public List<Elections> Elections { get; set; }
     }
 }
