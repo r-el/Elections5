@@ -48,11 +48,18 @@ namespace Elections.Models
                FullName = "Ariel Tanami",
                Mail = "rel@mail.com",
                Phone = "0587979345",
-               Password = "1234"
+               Password = "1234",
+            };
+            Elections elections = new Elections
+            {
+                Name = "בחירות 2022",
+                EndDate = DateTime.Now.AddDays(30),
+                Manager = manager
             };
 
             Stam.Add(stam);
             Managers.Add(manager);
+            Elections.Add(elections);
 
             SaveChanges();
         }
@@ -61,6 +68,7 @@ namespace Elections.Models
 
         //---------------------------------------- Creating Tables -----------------------------//
         public DbSet<Stam> Stam { get; set; }
+        public DbSet<Elections> Elections { get; set; }
         public DbSet<Manager> Managers { get; set; }
         //---------------------------------------- End Creating Tables -------------------------//
     }
