@@ -27,5 +27,7 @@ namespace Elections.Models
         [Display(Name="?האם ניתן לשנות בחירה")]
         [Required]
         public bool IsPossibleToChangeAVote { get; set; } = false;
+
+        public List<VoterPhoneInElections> VoterPhoneInElections { get; set; }
     }
 }
