@@ -56,6 +56,16 @@ namespace Elections.Models
                 EndDate = DateTime.Now.AddDays(30),
                 Manager = manager
             };
+            VoterPhoneInElections voterPhoneInElections1 = new VoterPhoneInElections
+            {
+                Phone = "0501234567",
+                Elections = elections
+            };
+            VoterPhoneInElections voterPhoneInElections2 = new VoterPhoneInElections
+            {
+                Phone = "0512345678",
+                Elections = elections
+            };
             Voter voter = new Voter
             {
                 PhoneID = "0587979345",
@@ -67,6 +77,8 @@ namespace Elections.Models
             Stam.Add(stam);
             Managers.Add(manager);
             Elections.Add(elections);
+            VotersPhonesInElections.Add(voterPhoneInElections1);
+            VotersPhonesInElections.Add(voterPhoneInElections2);
             Voters.Add(voter);
 
             SaveChanges();
@@ -79,6 +91,7 @@ namespace Elections.Models
         public DbSet<Elections> Elections { get; set; }
         public DbSet<Manager> Managers { get; set; }
         public DbSet<Voter> Voters { get; set; }
+        public DbSet<VoterPhoneInElections> VotersPhonesInElections { get; set; }
         //---------------------------------------- End Creating Tables -------------------------//
     }
 }
