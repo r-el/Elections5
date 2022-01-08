@@ -17,5 +17,7 @@ namespace Elections.Models
         [Required]
         [Display(Name = "מספר טלפון של בוחר")]
         public string Phone  { get; set; }
+
+        public List<Problem> Problems { get; set; }
     }
 }
