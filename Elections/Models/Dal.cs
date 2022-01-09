@@ -56,16 +56,21 @@ namespace Elections.Models
                 EndDate = DateTime.Now.AddDays(30),
                 Manager = manager
             };
+            Candidate candidate = new Candidate
+            {
+                FullName = "Simple Candidate"
+            };
             VoterPhoneInElections voterPhoneInElections1 = new VoterPhoneInElections
             {
                 Phone = "0501234567",
                 Elections = elections,
-                IsSupervisor = true
+                Candidate = candidate
             };
             VoterPhoneInElections voterPhoneInElections2 = new VoterPhoneInElections
             {
                 Phone = "0512345678",
-                Elections = elections
+                Elections = elections,
+                Candidate = candidate
             };
             Problem problem = new Problem
             {
@@ -83,9 +88,8 @@ namespace Elections.Models
             {
                 Content = "Simple Problem Note",
                 Problem = problem,
-                Supervisor = voterPhoneInElections1
+                VisitorPhoneID = "0587979345"
             };
-            
 
             Stam.Add(stam);
             Managers.Add(manager);
@@ -95,6 +99,7 @@ namespace Elections.Models
             Voters.Add(voter);
             Problems.Add(problem);
             ProblemNotes.Add(problemNote);
+            Candidates.Add(candidate);
 
             SaveChanges();
         }
@@ -109,6 +114,7 @@ namespace Elections.Models
         public DbSet<Problem> Problems { get; set; }
         public DbSet<Voter> Voters { get; set; }
         public DbSet<ProblemNotes> ProblemNotes { get; set; }
+        public DbSet<Candidate> Candidates { get; set; }
         //---------------------------------------- End Creating Tables -------------------------//
     }
 }
