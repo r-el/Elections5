@@ -6,16 +6,19 @@ using System.Threading.Tasks;
 
 namespace Elections.Models
 {
-    public class Problem
+    public class ProblemNotes
     {
         [Key]
         public int ID { get; set; }
-        [Required]
-        public VoterPhoneInElections VoterPhoneInElections { get; set; }
-        public List<ProblemNotes> ProblemNotes { get; set; }
 
-        [Display(Name = "תוכן התקלה")]
         [Required]
-        public string Description { get; set; }
+        public Problem Problem { get; set; }
+
+        [Required]
+        public VoterPhoneInElections Supervisor { get; set; }
+
+        [Display(Name = "הערות על תקלה")]
+        [Required]
+        public string Content { get; set; }
     }
 }
