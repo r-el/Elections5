@@ -60,17 +60,23 @@ namespace Elections.Models
             {
                 FullName = "Simple Candidate"
             };
+            VotingArea votingArea = new VotingArea
+            {
+                Name = "Jerusalem"
+            };
             VoterPhoneInElections voterPhoneInElections1 = new VoterPhoneInElections
             {
                 Phone = "0501234567",
                 Elections = elections,
-                Candidate = candidate
+                Candidate = candidate,
+                VotingArea = votingArea
             };
             VoterPhoneInElections voterPhoneInElections2 = new VoterPhoneInElections
             {
                 Phone = "0512345678",
                 Elections = elections,
-                Candidate = candidate
+                Candidate = candidate,
+
             };
             Problem problem = new Problem
             {
@@ -100,6 +106,7 @@ namespace Elections.Models
             Problems.Add(problem);
             ProblemNotes.Add(problemNote);
             Candidates.Add(candidate);
+            VotingAreas.Add(votingArea);
 
             SaveChanges();
         }
@@ -115,6 +122,7 @@ namespace Elections.Models
         public DbSet<Voter> Voters { get; set; }
         public DbSet<ProblemNotes> ProblemNotes { get; set; }
         public DbSet<Candidate> Candidates { get; set; }
+        public DbSet<VotingArea> VotingAreas { get; set; }
         //---------------------------------------- End Creating Tables -------------------------//
     }
 }
