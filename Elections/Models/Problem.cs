@@ -14,6 +14,10 @@ namespace Elections.Models
         public VoterPhoneInElections VoterPhoneInElections { get; set; }
         public List<ProblemNotes> ProblemNotes { get; set; }
 
+        [Display(Name = "האם נפתרה")]
+        [Required]
+        public bool Status { get; set; } = false;
+
         [Display(Name = "תוכן התקלה")]
         [Required]
         public string Description { get; set; }
