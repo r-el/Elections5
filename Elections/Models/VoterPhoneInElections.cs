@@ -18,6 +18,9 @@ namespace Elections.Models
         [Display(Name = "מספר טלפון של בוחר")]
         public string Phone  { get; set; }
 
+        // איזור בחירה
+        public VotingArea VotingArea { get; set; }
+
         [Display(Name = "בחר במועמד")]
         public Candidate Candidate { get; set; }
 
