@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace Elections.Models
-{
+{ // טלפון של מצביע בבחירות 
     public class VoterPhoneInElections
     {
         [Key]
@@ -18,8 +18,8 @@ namespace Elections.Models
         [Display(Name = "מספר טלפון של בוחר")]
         public string Phone  { get; set; }
 
-        [Display(Name = "האם מפקח")]
-        public bool IsSupervisor { get; set; } = false;
+        [Display(Name = "בחר במועמד")]
+        public Candidate Candidate { get; set; }
 
         public List<Problem> Problems { get; set; }
     }

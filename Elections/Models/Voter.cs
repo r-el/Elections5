@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace Elections.Models
-{
+{ // מצביע שכבר נרשם במערכת
     public class Voter
     {
         [Key]

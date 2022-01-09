@@ -15,7 +15,7 @@ namespace Elections.Models
         public Problem Problem { get; set; }
 
         [Required]
-        public VoterPhoneInElections Supervisor { get; set; }
+        public string VisitorPhoneID { get; set; }
 
         [Display(Name = "הערות על תקלה")]
         [Required]
