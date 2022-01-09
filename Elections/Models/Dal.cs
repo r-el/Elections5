@@ -59,7 +59,8 @@ namespace Elections.Models
             VoterPhoneInElections voterPhoneInElections1 = new VoterPhoneInElections
             {
                 Phone = "0501234567",
-                Elections = elections
+                Elections = elections,
+                IsSupervisor = true
             };
             VoterPhoneInElections voterPhoneInElections2 = new VoterPhoneInElections
             {
@@ -68,7 +69,7 @@ namespace Elections.Models
             };
             Problem problem = new Problem
             {
-                Content = "Simple Problem",
+                Description = "Simple Problem",
                 VoterPhoneInElections = voterPhoneInElections1
             };
             Voter voter = new Voter
@@ -78,14 +79,22 @@ namespace Elections.Models
                 Mail = "rel@mail.com",
                 Password = "rel12345"
             };
+            ProblemNotes problemNote = new ProblemNotes
+            {
+                Content = "Simple Problem Note",
+                Problem = problem,
+                Supervisor = voterPhoneInElections1
+            };
+            
 
             Stam.Add(stam);
             Managers.Add(manager);
             Elections.Add(elections);
             VotersPhonesInElections.Add(voterPhoneInElections1);
             VotersPhonesInElections.Add(voterPhoneInElections2);
-            Problems.Add(problem);
             Voters.Add(voter);
+            Problems.Add(problem);
+            ProblemNotes.Add(problemNote);
 
             SaveChanges();
         }
@@ -99,6 +108,7 @@ namespace Elections.Models
         public DbSet<VoterPhoneInElections> VotersPhonesInElections { get; set; }
         public DbSet<Problem> Problems { get; set; }
         public DbSet<Voter> Voters { get; set; }
+        public DbSet<ProblemNotes> ProblemNotes { get; set; }
         //---------------------------------------- End Creating Tables -------------------------//
     }
 }
