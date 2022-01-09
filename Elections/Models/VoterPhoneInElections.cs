@@ -18,6 +18,9 @@ namespace Elections.Models
         [Display(Name = "מספר טלפון של בוחר")]
         public string Phone  { get; set; }
 
+        [Display(Name = "האם מפקח")]
+        public bool IsSupervisor { get; set; } = false;
+
         public List<Problem> Problems { get; set; }
     }
 }

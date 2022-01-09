@@ -29,8 +29,5 @@ namespace Elections.Models
         [RegularExpression("(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{8,20})$", ErrorMessage = "סיסמא חייבת להיות עם מספרים ואותיות, בין 8 ל-10 ספרות ")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
-
-        [Display(Name = "האם מפקח")]
-        public bool IsSupervisor { get; set; } = false;
     }
 }
