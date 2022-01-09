@@ -66,6 +66,11 @@ namespace Elections.Models
                 Phone = "0512345678",
                 Elections = elections
             };
+            Problem problem = new Problem
+            {
+                Content = "Simple Problem",
+                VoterPhoneInElections = voterPhoneInElections1
+            };
             Voter voter = new Voter
             {
                 PhoneID = "0587979345",
@@ -79,6 +84,7 @@ namespace Elections.Models
             Elections.Add(elections);
             VotersPhonesInElections.Add(voterPhoneInElections1);
             VotersPhonesInElections.Add(voterPhoneInElections2);
+            Problems.Add(problem);
             Voters.Add(voter);
 
             SaveChanges();
@@ -88,10 +94,11 @@ namespace Elections.Models
 
         //---------------------------------------- Creating Tables -----------------------------//
         public DbSet<Stam> Stam { get; set; }
-        public DbSet<Elections> Elections { get; set; }
         public DbSet<Manager> Managers { get; set; }
-        public DbSet<Voter> Voters { get; set; }
+        public DbSet<Elections> Elections { get; set; }
         public DbSet<VoterPhoneInElections> VotersPhonesInElections { get; set; }
+        public DbSet<Problem> Problems { get; set; }
+        public DbSet<Voter> Voters { get; set; }
         //---------------------------------------- End Creating Tables -------------------------//
     }
 }
