@@ -29,5 +29,7 @@ namespace Elections.Models
         public bool IsPossibleToChangeAVote { get; set; } = false;
 
         public List<VoterPhoneInElections> VoterPhoneInElections { get; set; }
+
+        public List<Candidate> Candidates { get; set; }
     }
 }

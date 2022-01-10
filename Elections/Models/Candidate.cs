@@ -15,6 +15,8 @@ namespace Elections.Models
         [Required]
         public string FullName { get; set; }
 
+        public Elections Elections { get; set; }
+
         public List<VoterPhoneInElections> Voters { get; set; }
     }
 }
