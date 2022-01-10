@@ -8,19 +8,6 @@ namespace Elections.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Candidates",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Candidates", x => x.ID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Managers",
                 columns: table => new
                 {
@@ -96,6 +83,26 @@ namespace Elections.Data.Migrations
                         name: "FK_Elections_Managers_ManagerID",
                         column: x => x.ManagerID,
                         principalTable: "Managers",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Candidates",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ElectionsID = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Candidates", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Candidates_Elections_ElectionsID",
+                        column: x => x.ElectionsID,
+                        principalTable: "Elections",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -177,6 +184,11 @@ namespace Elections.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Candidates_ElectionsID",
+                table: "Candidates",
+                column: "ElectionsID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Elections_ManagerID",
                 table: "Elections",
                 column: "ManagerID");
@@ -228,10 +240,10 @@ namespace Elections.Data.Migrations
                 name: "Candidates");
 
             migrationBuilder.DropTable(
-                name: "Elections");
+                name: "VotingAreas");
 
             migrationBuilder.DropTable(
-                name: "VotingAreas");
+                name: "Elections");
 
             migrationBuilder.DropTable(
                 name: "Managers");

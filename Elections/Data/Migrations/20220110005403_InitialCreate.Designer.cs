@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Elections.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220110000458_InitialCreate")]
+    [Migration("20220110005403_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,11 +28,16 @@ namespace Elections.Data.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<int?>("ElectionsID")
+                        .HasColumnType("int");
+
                     b.Property<string>("FullName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("ElectionsID");
 
                     b.ToTable("Candidates");
                 });
@@ -232,6 +237,15 @@ namespace Elections.Data.Migrations
                     b.ToTable("VotingAreas");
                 });
 
+            modelBuilder.Entity("Elections.Models.Candidate", b =>
+                {
+                    b.HasOne("Elections.Models.Elections", "Elections")
+                        .WithMany("Candidates")
+                        .HasForeignKey("ElectionsID");
+
+                    b.Navigation("Elections");
+                });
+
             modelBuilder.Entity("Elections.Models.Elections", b =>
                 {
                     b.HasOne("Elections.Models.Manager", "Manager")
@@ -293,6 +307,8 @@ namespace Elections.Data.Migrations
 
             modelBuilder.Entity("Elections.Models.Elections", b =>
                 {
+                    b.Navigation("Candidates");
+
                     b.Navigation("VoterPhoneInElections");
                 });
 
