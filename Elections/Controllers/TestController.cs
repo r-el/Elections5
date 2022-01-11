@@ -9,9 +9,7 @@ using System.Threading.Tasks;
 
 namespace Elections.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class TestController : ControllerBase
+    public class TestController : BaseApiController
     {
         // גישה לדטאבייס פרטית
         private readonly DataContext _context;
