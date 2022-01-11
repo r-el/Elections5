@@ -20,7 +20,27 @@ namespace Elections.Controllers
             _context = context;
         }
 
-        // api/users
+        //---------------------------------------- Voter Routes --------------------------------------//
+        //// @route  GET 
+        //// @desc   Get All Managers
+        //// @access Public
+        //[HttpGet]
+        //public async Task<ActionResult<IEnumerable<Manager>>> GetAllManagers()
+        //{// תחזיר לקליינט את כל המשתמשים מהדטאבייס
+        //    return await _context.Managers.ToListAsync(); // || _context.Users.ToListAsync().;
+        //}
+
+        //// @route  GET /api/test/{id}
+        //// @desc   Find Voter by PhoneID
+        //// @access Public
+        //[HttpGet("{id}")]
+        //public async Task<ActionResult<Manager>> GetVoter(int id)
+        //{// תחזיר לקליינט את המשתמש הרצוי
+        //    return await _context.Managers.FindAsync(id);
+        //}
+        //---------------------------------------- End Voter Routes ----------------------------------//
+
+        //---------------------------------------- Voter Routes --------------------------------------//
         // @route  GET /api/test
         // @desc   Get All Registers Voters
         // @access Public
@@ -30,7 +50,7 @@ namespace Elections.Controllers
             return await _context.Voters.ToListAsync(); // || _context.Users.ToListAsync().;
         }
 
-        // @route  GET /api/test/{id}
+        // @route  GET /api/test/{PhoneID}
         // @desc   Find Voter by PhoneID
         // @access Public
         [HttpGet("{id}")]
@@ -38,5 +58,7 @@ namespace Elections.Controllers
         {// תחזיר לקליינט את המשתמש הרצוי
             return await _context.Voters.FindAsync(id);
         }
+        //---------------------------------------- End Voter Routes ----------------------------------//
+
     }
 }
