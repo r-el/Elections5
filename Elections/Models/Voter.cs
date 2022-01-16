@@ -9,6 +9,9 @@ namespace Elections.Models
     public class Voter
     {
         [Key]
+        public int ID { get; set; }
+
+        // Unique, validate in AccountController
         [Display(Name = "מספר טלפון")]
         [RegularExpression(@"\d{10}", ErrorMessage = "אנא הזן מספר טלפון בעל 10 ספרות")] //[RegularExpression("([0-9]+)")]  // Only Nums
         [Required(ErrorMessage = "הזן מספר טלפון")]
@@ -34,5 +37,8 @@ namespace Elections.Models
         public byte[] PasswordHash { get; set; }
         [Required]
         public byte[] PasswordSalt { get; set; }
+
+        // זכויות הצבעה של בוחר שכבר נרשם במערכת
+        public List<VoterPhoneInElections> VoterElections { get; set; }
     }
 }

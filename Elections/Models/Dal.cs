@@ -64,16 +64,30 @@ namespace Elections.Models
             {
                 Name = "Jerusalem"
             };
+            Voter voter = new Voter
+            {
+                PhoneID = "0512345678",
+                FullName = "Ariel Tanami",
+                Mail = "rel@mail.com",
+                Password = "rel12345"
+            };
+            Voter voter2 = new Voter
+            {
+                PhoneID = "0501234567",
+                FullName = "Ariel Tanami",
+                Mail = "rel@mail.com",
+                Password = "rel12345"
+            };
             VoterPhoneInElections voterPhoneInElections1 = new VoterPhoneInElections
             {
-                Phone = "0501234567",
+                Voter = voter,
                 Elections = elections,
                 Candidate = candidate,
                 VotingArea = votingArea
             };
             VoterPhoneInElections voterPhoneInElections2 = new VoterPhoneInElections
             {
-                Phone = "0512345678",
+                Voter = voter2,
                 Elections = elections,
                 Candidate = candidate,
 
@@ -82,13 +96,6 @@ namespace Elections.Models
             {
                 Description = "Simple Problem",
                 VoterPhoneInElections = voterPhoneInElections1
-            };
-            Voter voter = new Voter
-            {
-                PhoneID = "0587979345",
-                FullName = "Ariel Tanami",
-                Mail = "rel@mail.com",
-                Password = "rel12345"
             };
             ProblemNotes problemNote = new ProblemNotes
             {

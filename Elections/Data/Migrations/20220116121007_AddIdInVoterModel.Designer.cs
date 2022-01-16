@@ -4,14 +4,16 @@ using Elections.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Elections.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220116121007_AddIdInVoterModel")]
+    partial class AddIdInVoterModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -215,8 +217,9 @@ namespace Elections.Data.Migrations
                     b.Property<int>("ElectionsID")
                         .HasColumnType("int");
 
-                    b.Property<int>("VoterID")
-                        .HasColumnType("int");
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("VotingAreaID")
                         .HasColumnType("int");
@@ -226,8 +229,6 @@ namespace Elections.Data.Migrations
                     b.HasIndex("CandidateID");
 
                     b.HasIndex("ElectionsID");
-
-                    b.HasIndex("VoterID");
 
                     b.HasIndex("VotingAreaID");
 
@@ -302,12 +303,6 @@ namespace Elections.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Elections.Models.Voter", "Voter")
-                        .WithMany("VoterPhoneInElections")
-                        .HasForeignKey("VoterID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Elections.Models.VotingArea", "VotingArea")
                         .WithMany("Voters")
                         .HasForeignKey("VotingAreaID");
@@ -315,8 +310,6 @@ namespace Elections.Data.Migrations
                     b.Navigation("Candidate");
 
                     b.Navigation("Elections");
-
-                    b.Navigation("Voter");
 
                     b.Navigation("VotingArea");
                 });
@@ -341,11 +334,6 @@ namespace Elections.Data.Migrations
             modelBuilder.Entity("Elections.Models.Problem", b =>
                 {
                     b.Navigation("ProblemNotes");
-                });
-
-            modelBuilder.Entity("Elections.Models.Voter", b =>
-                {
-                    b.Navigation("VoterPhoneInElections");
                 });
 
             modelBuilder.Entity("Elections.Models.VoterPhoneInElections", b =>
