@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Security.Cryptography;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Elections.Data;
@@ -18,6 +19,32 @@ namespace Elections.Controllers
         public AccountController(DataContext context)
         {
             _context = context;
+        }
+
+        [HttpPost("Login")]
+        public async Task<ActionResult<Voter>> Login(string phoneID, string password)
+        {
+            // וודא תקינות ערכים
+            if (phoneID == string.Empty || password == string.Empty) return BadRequest("One or more fields are empty"); // Check if not null
+            if (await PhoneNotValid(phoneID)) return BadRequest("מספר טלפון חייב להיות בעל 10 ספרות");
+
+            var voter = await _context.Voters
+                .SingleOrDefaultAsync(x => x.PhoneID == phoneID); // Get the Voter from the DB by phoneID
+
+            if (voter == null) return Unauthorized("Invalid username"); // Check if voter exists in DB
+
+            using var hmac = new HMACSHA512(voter.PasswordSalt); // Use in the second HMACSHA512 ctor, (passing the key, and no generatekey)
+
+            var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
+
+            // Check if the passwords match
+            // loop over each element in the array byte
+            for (int i = 0; i < computedHash.Length; i++)
+            {
+                if (computedHash[i] != voter.PasswordHash[i]) return Unauthorized("Invalid password");
+            }
+
+            return voter;
         }
 
         [HttpPost("register")]
@@ -67,5 +94,5 @@ namespace Elections.Controllers
 
             return (password != null) && !(rgxPswd.IsMatch(password));
         }
-}
+    }
 }
