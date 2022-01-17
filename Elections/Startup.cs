@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Elections.Data;
+using Elections.Interfaces;
+using Elections.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,6 +32,7 @@ namespace Elections
             services.AddDbContext<DataContext>(options => {
                 options.UseSqlServer(_configuration.GetConnectionString("DefalutConnection"));
             });
+            services.AddScoped<ITokenService, ToeknService>();
             services.AddControllersWithViews();
             services.AddSwaggerGen(c =>
             {
