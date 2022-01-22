@@ -34,17 +34,6 @@ namespace Elections
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddApplicationServices(_config);
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            .AddJwtBearer(options =>
-            {
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["TokenKey"])),
-                    ValidateIssuer = false, // API Server
-                    ValidateAudience = false // כרגע זה אנגולר
-                };
-            });
             services.AddControllersWithViews();
             services.AddSwaggerGen(c =>
             {
