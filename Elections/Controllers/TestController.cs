@@ -44,7 +44,7 @@ namespace Elections.Controllers
         // @desc   Get All Registers Voters
         // @access Public
         [HttpGet]
-        //[Authorize]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<Voter>>> GetAllVoters()
         {// תחזיר לקליינט את כל המשתמשים מהדטאבייס
             return await _context.Voters.ToListAsync(); // || _context.Users.ToListAsync().;
