@@ -32,7 +32,7 @@ namespace Elections
             services.AddDbContext<DataContext>(options => {
                 options.UseSqlServer(_configuration.GetConnectionString("DefalutConnection"));
             });
-            services.AddScoped<ITokenService, ToeknService>();
+            services.AddScoped<ITokenService, TokenService>();
             services.AddControllersWithViews();
             services.AddSwaggerGen(c =>
             {
