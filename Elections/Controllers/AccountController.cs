@@ -7,6 +7,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Elections.Data;
+using Elections.DTOs;
 using Elections.Interfaces;
 using Elections.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -25,7 +26,7 @@ namespace Elections.Controllers
         }
 
         [HttpPost("Login")]
-        public async Task<ActionResult<Voter>> Login(string phoneID, string password)
+        public async Task<ActionResult<VoterDto>> Login(string phoneID, string password)
         {
             // וודא תקינות ערכים
             if (phoneID == string.Empty || password == string.Empty) return BadRequest("One or more fields are empty"); // Check if not null
@@ -47,11 +48,15 @@ namespace Elections.Controllers
                 if (computedHash[i] != voter.PasswordHash[i]) return Unauthorized("Invalid password");
             }
 
-            return voter;
+            return new VoterDto
+            {
+                Phone = voter.PhoneID,
+                Token = _tokenService.CreateToken(voter)
+            }; ;
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<Voter>> Register(string phoneID, string fullName, string mail, string password)
+        public async Task<ActionResult<VoterDto>> Register(string phoneID, string fullName, string mail, string password)
         {
             // Check if the voter exists
             if (await VoterExists(phoneID)) return BadRequest("The voter is already registered");
@@ -77,8 +82,11 @@ namespace Elections.Controllers
             _context.Voters.Add(voter); // EF tracking
             await _context.SaveChangesAsync(); // Save to the db
 
-            return voter;
-
+            return new VoterDto
+            {
+                Phone = voter.PhoneID,
+                Token = _tokenService.CreateToken(voter)
+            }; ;
         }
 
         // Check if voter exists(by phoneID)
