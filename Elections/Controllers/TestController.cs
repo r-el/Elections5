@@ -1,5 +1,6 @@
 ﻿using Elections.Data;
 using Elections.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -43,6 +44,7 @@ namespace Elections.Controllers
         // @desc   Get All Registers Voters
         // @access Public
         [HttpGet]
+        //[Authorize]
         public async Task<ActionResult<IEnumerable<Voter>>> GetAllVoters()
         {// תחזיר לקליינט את כל המשתמשים מהדטאבייס
             return await _context.Voters.ToListAsync(); // || _context.Users.ToListAsync().;
