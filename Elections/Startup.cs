@@ -34,6 +34,7 @@ namespace Elections
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddApplicationServices(_config);
+            services.AddIdentityServices(_config);
             services.AddControllersWithViews();
             services.AddSwaggerGen(c =>
             {
