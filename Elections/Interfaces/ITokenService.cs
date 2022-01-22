@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Elections.Interfaces
 {
-    interface ITokenService
+    public interface ITokenService
     {
         string CreateToken(Voter voter);
     }
