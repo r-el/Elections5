@@ -32,10 +32,6 @@ namespace Elections
         // (למשל דיבי_קונטקסט (חיבור לדטאבייס
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(options => {
-                options.UseSqlServer(_config.GetConnectionString("DefalutConnection"));
-            });
-            services.AddScoped<ITokenService, TokenService>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
             {
