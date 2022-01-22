@@ -5,7 +5,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,7 +22,25 @@ namespace Elections.Services
         }
         public string CreateToken(Voter voter)
         {
-            throw new NotImplementedException();
+            var claims = new List<Claim>
+            {
+                new Claim(JwtRegisteredClaimNames.NameId, voter.FullName) // בינתיים הקליים היחיד
+            };
+
+            var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature); // SecurityKey & Algorithm
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(claims),
+                Expires = DateTime.Now.AddDays(7), // (דרישות פרוייקט גמר, זה עד שעה)
+                SigningCredentials = creds
+            };
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+
+            return tokenHandler.WriteToken(token);
         }
     }
 }
