@@ -20,7 +20,7 @@ namespace Elections.Controllers
 
         public IActionResult Index()
         {
-            //Dal.Get.Stam.ToList();
+            Dal.Get.Stam.ToList();
             return View();
         }
 
