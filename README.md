@@ -1,4 +1,4 @@
-# Eelections
+# Elections
 
 #### This repository, is a final project I received while studying. The requirements of the final project can be found in the Root Library Directory (Hebrew language).
 
